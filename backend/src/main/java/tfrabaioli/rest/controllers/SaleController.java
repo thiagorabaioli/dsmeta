@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,9 +44,9 @@ public class SaleController {
 		
 	}
 	
-	@RequestMapping(value="/notification", method = RequestMethod.GET)
-	public void notifySms() {
-		smsService.sendSms();
+	@RequestMapping(value="/{id}/notification", method = RequestMethod.GET)
+	public void notifySms(@PathVariable Long id) {
+		smsService.sendSms(id);
 	}
 	
 
