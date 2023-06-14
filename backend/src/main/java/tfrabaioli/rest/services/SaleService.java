@@ -1,7 +1,9 @@
 package tfrabaioli.rest.services;
 
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +30,12 @@ public class SaleService {
 	
 	public Page<Sale> findSales(String minDate, String maxDate, Pageable pageable){
 		
-		LocalDate min = LocalDate.parse(minDate);
-		LocalDate max = LocalDate.parse(maxDate);
+		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
 		
-		return saleRepo.findAll(pageable);
+		LocalDate min = minDate.equals("") ? today.minusDays(365) :  LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+		
+		return saleRepo.findSales(min,max, pageable);
 	}
 
 }
