@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tfrabaioli.rest.entity.Sale;
 import tfrabaioli.rest.services.SaleService;
+import tfrabaioli.rest.services.SmsService;
 
 @RestController
 @RequestMapping(value = "/sales")
@@ -22,6 +23,9 @@ public class SaleController {
 	
 	@Autowired
 	private SaleService service;
+	
+	@Autowired
+	private SmsService smsService;
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -37,6 +41,11 @@ public class SaleController {
 		Pageable pagaeble){
 		return service.findSales(minDate,maxDate,pagaeble);
 		
+	}
+	
+	@RequestMapping(value="/notification", method = RequestMethod.GET)
+	public void notifySms() {
+		smsService.sendSms();
 	}
 	
 

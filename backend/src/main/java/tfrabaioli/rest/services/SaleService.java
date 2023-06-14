@@ -23,7 +23,6 @@ public class SaleService {
 	
 	public List<Sale> findSales() {
 		
-		List<Sale> list = new ArrayList<>();
 		return saleRepo.findAll();
 		
 	}
